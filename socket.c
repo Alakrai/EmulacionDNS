@@ -72,7 +72,7 @@ int port;
 	{
 		hp = gethostbyname(host);
 		if (hp == NULL)
-		{ perror (" ¿A QUE HOST QUIERO CONECTARSE? ");
+		{ perror (" ¿A QUE HOST QUIERO CONECTAR? ");
 			exit (1);
 		}
 		bcopy(hp->h_addr, &client.sin_addr, hp->h_length);
