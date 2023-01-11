@@ -18,8 +18,7 @@ while(1)
 while((conexion=acepta_conexion(dirlisten))<0);
 read(conexion, &peticion, sizeof(peticion));
 printf("\nDATO RECIBIDO:%s\n",peticion.mensaje);
-printf("Escuchando ....
-");
+printf("Escuchando ....");
 strcpy(respuesta.mensaje,"Mensaje recibido");
 write(conexion, &respuesta, sizeof(respuesta));
 close(conexion);
