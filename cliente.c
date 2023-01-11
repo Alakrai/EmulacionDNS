@@ -13,7 +13,7 @@ struct PDU peticion, respuesta;
 printf("--------- INICIO DE CLIENTE --------\n");
 printf("Ingrese dato a enviar:");
 scanf("%s",dato);
-conexion=socket_cliente("loki",55055);
+conexion=socket_cliente("server",55055);
 strcpy(peticion.mensaje,dato);
 write(conexion,&peticion,sizeof(peticion));
 read(conexion, &respuesta, sizeof(respuesta));
