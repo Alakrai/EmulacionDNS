@@ -12,8 +12,9 @@ extern int errno;
 
 int socket_servidor(side)
 int side;
-{
+{//Esto de aqui no se como funciona, pero lo hace, parece declarar socket_servidor(side)	NO TOCAR
 	struct sockaddr_in server;
+	
 	int sock, x, flags;
 	sock= socket(AF_INET, SOCK_STREAM, 0);
 	if (sock < 0)
@@ -21,33 +22,40 @@ int side;
 		perror ("NO SE PUEDE CREAR SOCKET");
 		exit (1);
 	}
+	
 	bzero(&server, sizeof(server));
 	server.sin_family = AF_INET;
 	server.sin_addr.s_addr = INADDR_ANY;
 	server.sin_port = htons(side);
 	x = bind(sock, &server, sizeof(server));
+
 	if (x<0)
 	{
 		close(sock);
 		perror("NO SE PUEDE ENLAZAR");
 		exit(1);
 	}
+
 	if (listen(sock, 5) < 0)
 	{
 		perror ("NO ESCUCHA");
 		exit (1);
 	}
+
 	return sock;
 }
-int acepta_conexion(sock)
+
 int sock;
+int acepta_conexion(sock)
 { struct sockaddr_in server;
 	int adrl, x, flags;
 	adrl = sizeof (struct sockaddr_in);
 	x = accept (sock, &server, &adrl);
 	return x;
 }
+
 /*********** cliente ***********************/
+
 int socket_cliente(host, port)
 char *host;
 int port;
