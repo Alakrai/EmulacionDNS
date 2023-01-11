@@ -6,8 +6,10 @@
 #include <netdb.h>
 #include <stdio.h>
 #include <ctype.h>
+
 #define NOBLOCK
 extern int errno;
+
 int socket_servidor(side)
 int side;
 {
@@ -37,41 +39,41 @@ int side;
 	}
 	return sock;
 }
-int acepta_conexion(sock);
+int acepta_conexion(sock)
 int sock;
-/*{ struct sockaddr_in server;
+{ struct sockaddr_in server;
 	int adrl, x, flags;
 	adrl = sizeof (struct sockaddr_in);
 	x = accept (sock, &server, &adrl);
 	return x;
-}*/
+}
 /*********** cliente ***********************/
 int socket_cliente(host, port)
 char *host;
 int port;
 {
-int csock;
-struct sockaddr_in client;
-struct hostent *hp, *gethostbyname();
-bzero(&client, sizeof(client));
-client.sin_family = AF_INET;
-client.sin_port = htons(port);
-if (isdigit(host[0]))
-client.sin_addr.s_addr = inet_addr(host);
-else
-{
-hp = gethostbyname(host);
-if (hp == NULL)
-{ perror (" ¿A QUE HOST QUIERO CONECTARSE? ");
-exit (1);
-}
-bcopy(hp->h_addr, &client.sin_addr, hp->h_length);
-}
-csock = socket(AF_INET, SOCK_STREAM, 0);
-if (csock < 0)
-{ perror ("NO SE PUEDE CREAR EL SOCKET");
-exit (1);
-}
-connect(csock, &client, sizeof(client));
-return csock;
+	int csock;
+	struct sockaddr_in client;
+	struct hostent *hp, *gethostbyname();
+	bzero(&client, sizeof(client));
+	client.sin_family = AF_INET;
+	client.sin_port = htons(port);
+	if (isdigit(host[0]))
+		client.sin_addr.s_addr = inet_addr(host);
+	else
+	{
+		hp = gethostbyname(host);
+		if (hp == NULL)
+		{ perror (" ¿A QUE HOST QUIERO CONECTARSE? ");
+			exit (1);
+		}
+		bcopy(hp->h_addr, &client.sin_addr, hp->h_length);
+	}
+	csock = socket(AF_INET, SOCK_STREAM, 0);
+	if (csock < 0)
+	{ perror ("NO SE PUEDE CREAR EL SOCKET");
+		exit (1);
+	}
+	connect(csock, &client, sizeof(client));
+	return csock;
 }
