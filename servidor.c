@@ -29,7 +29,14 @@ main()
 		printf("Escuchando ....");
 		
 		//Aqui se elabora la respuesta entregada al cliente
+		//peticion.mensaje es un PDU con el mensaje enviado por el cliente
+		
+		// Consultar a una BDD
+		// respuesta.mensaje=dameLaIp(peticion.mensaje);
+
 		strcpy(respuesta.mensaje,"Mensaje recibido");
+
+
 
 		write(conexion, &respuesta, sizeof(respuesta));
 		close(conexion);
