@@ -18,7 +18,7 @@ char* dameLaIp(struct PDU pdu)
       exit(1);
   }
 
-  if (mysql_real_connect(con, "190.161.106.202", "dns", "IntroARedes_1@",
+  if (mysql_real_connect(con, "190.161.106.202:3306", "dns", "IntroARedes_1@",
           NULL, 0, NULL, 0) == NULL)
   {
       fprintf(stderr, "%s\n", mysql_error(con));
@@ -54,7 +54,9 @@ char* dameLaIp(struct PDU pdu)
     //creamos la consulta SQL
     char query[256];
     sprintf(query, "SELECT IP FROM sitios WHERE Dominio = '%s'", pdu.mensaje);
-    if (mysql_query(conn, query)) {
+    if (mysql_query(conn, query)) 
+    {
+        //Aqui imprime el error
         printf("Error %u: %s\n", mysql_errno(conn), mysql_error(conn));
         mysql_close(conn);
         return NULL;
