@@ -43,7 +43,7 @@ main()
 		//strcpy(respuesta.mensaje,"Mensaje recibido");
 
 
-		write(conexion, &respuesta, sizeof(respuesta));
+		write(conexion, "&respuesta", 10);//sizeof(respuesta));
 		close(conexion);
 	}
 }//Fin main

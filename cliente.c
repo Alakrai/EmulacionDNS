@@ -17,11 +17,14 @@ main()
     printf("Ingrese dato a enviar:");
 
     scanf("%s",dato);
-    conexion=socket_cliente("dns",55055); //Puerto desde el que trabaja
+    conexion=socket_cliente("server",55055); //Puerto desde el que trabaja
 
     //Recibe dato capturado desde teclado y lo manda a peticion.mensaje
+    
     strcpy(peticion.mensaje,dato);
+    
     write(conexion,&peticion,sizeof(peticion));
+
     read(conexion, &respuesta, sizeof(respuesta));
 
     printf("RESPUESTA DE SERVIDOR: %s\n", respuesta.mensaje);
