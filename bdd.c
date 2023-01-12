@@ -51,14 +51,6 @@ char* dameLaIp(struct PDU pdu)
         return NULL;
     }
 
-    if (mysql_real_connect(con, "190.161.106.202", "dns", "IntroARedes_1@",
-          NULL, 0, NULL, 0) == NULL) {
-        printf("Error %u: %s\n", mysql_errno(conn), mysql_error(conn));
-        mysql_close(conn);
-        return NULL;
-    }
-
-
     //creamos la consulta SQL
     char query[256];
     sprintf(query, "SELECT IP FROM sitios WHERE Dominio = '%s'", pdu.mensaje);
@@ -77,17 +69,20 @@ char* dameLaIp(struct PDU pdu)
 
     //recogemos el resultado
     row = mysql_fetch_row(result);
-    if (row == NULL) {
+
+    if (row == NULL) //Si el resultado == NULL
+    {
         printf("No se encontró el dominio en la base de datos\n");
         mysql_free_result(result);
         mysql_close(conn);
         return NULL;
     }
     
-    //asignamos la IP encontrada a una variable
+    //sino asignamos la IP encontrada a una variable  IP||
     ip = row[0];
     mysql_free_result(result);
     mysql_close(conn);
+    
     return ip;
 
     mysql_close(con);
