@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <string.h>
+
 extern acepta_conexion();
 extern call_on_sock();
 
@@ -32,10 +33,14 @@ main()
 		//peticion.mensaje es un PDU con el mensaje enviado por el cliente
 		
 		// Consultar a una BDD
+		strcpy(respuesta.mensaje,dameLaIp(peticion.mensaje));
+
 		// respuesta.mensaje=dameLaIp(peticion.mensaje);
 
-		strcpy(respuesta.mensaje,"Mensaje recibido");
-
+		//respuesta.mensaje=dameLaIp(peticion.mensaje);
+		
+		printf("Mensaje recibido\n");
+		//strcpy(respuesta.mensaje,"Mensaje recibido");
 
 
 		write(conexion, &respuesta, sizeof(respuesta));
